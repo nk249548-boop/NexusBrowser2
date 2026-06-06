@@ -8,12 +8,12 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import android.content.Context
 import android.speech.RecognizerIntent
 import android.app.ActivityNotFoundException
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 
 class SearchActivity : AppCompatActivity() {
 
@@ -50,6 +50,20 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var dataSaverMenu: LinearLayout
     private lateinit var screenshotMenu: LinearLayout
     private lateinit var exitMenu: LinearLayout
+
+    // Voice search launcher
+    private val voiceSearchLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val results = result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            if (results != null && results.isNotEmpty()) {
+                val voiceQuery = results[0]
+                searchEditText.setText(voiceQuery)
+                performSearch()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -201,13 +215,14 @@ class SearchActivity : AppCompatActivity() {
     private fun performVoiceSearch() {
         try {
             // Check if device supports speech recognition
-            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US")
-            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak to search...")
+            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+                putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US")
+                putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak to search...")
+            }
             
             try {
-                startActivityForResult(intent, VOICE_SEARCH_REQUEST_CODE)
+                voiceSearchLauncher.launch(intent)
             } catch (e: ActivityNotFoundException) {
                 Toast.makeText(this, "Speech Recognition not available", Toast.LENGTH_SHORT).show()
             }
@@ -348,24 +363,6 @@ class SearchActivity : AppCompatActivity() {
         intent.action = "TAKE_SCREENSHOT"
         startActivity(intent)
         finish()
-    }
-
-    // ─── Voice Search Handler ───────────────────────────────────
-
-    @Deprecated("Deprecated in API 33")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        
-        if (requestCode == VOICE_SEARCH_REQUEST_CODE && resultCode == RESULT_OK) {
-            data?.let {
-                val results = it.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-                if (results != null && results.isNotEmpty()) {
-                    val voiceQuery = results[0]
-                    searchEditText.setText(voiceQuery)
-                    performSearch()
-                }
-            }
-        }
     }
 
 }
