@@ -1,18 +1,18 @@
 package com.nexus.browser
 
+import android.app.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
-import androidx.appcompat.app.AppCompatActivity
-import android.content.Context
-import android.speech.RecognizerIntent
-import android.app.ActivityNotFoundException
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.result.contract.ActivityResultContracts
 
 class SearchActivity : AppCompatActivity() {
