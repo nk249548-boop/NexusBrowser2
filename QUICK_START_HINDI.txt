@@ -1,0 +1,160 @@
+================================================================================
+            🚀 NEXUS BROWSER - QUICK START GUIDE (HINDI)
+================================================================================
+
+तुम्हारे GitHub पर APK बनाने के लिए सबसे आसान तरीका:
+
+================================================================================
+                          STEP 1: CODE UPLOAD करो
+================================================================================
+
+अपने computer पर terminal/command prompt खोलो और ये commands चलाओ:
+
+    cd आपकी-folder-path
+    git add .
+    git commit -m "NexusBrowser v4.0 Ready"
+    git push origin main
+
+✅ Done! Code GitHub पर चला गया
+
+================================================================================
+                         STEP 2: BUILD होने दो (WAIT करो)
+================================================================================
+
+1. GitHub website खोलो
+2. अपना repo खोलो (nk249548-boop/NexusBrowser2)
+3. "Actions" tab click करो
+4. "Build APK - NexusBrowser" workflow को देखो
+
+यह automatically build करने लगेगा! ⏳
+
+समय लगेगा: 5-8 मिनट
+
+================================================================================
+                         STEP 3: APK DOWNLOAD करो
+================================================================================
+
+Build complete होने के बाद:
+
+1. "Actions" tab में जाओ
+2. Latest "Build APK" workflow को click करो
+3. Page को scroll down करो
+4. "Artifacts" section में देखो:
+   - NexusBrowser-debug ← यह download करो!
+   - NexusBrowser-release-unsigned
+
+Download करो और save करो!
+
+================================================================================
+                      STEP 4: PHONE में INSTALL करो
+================================================================================
+
+तरीका A - सबसे आसान:
+   1. APK फोन में transfer करो (USB cable या Email)
+   2. File manager से open करो
+   3. "Install" दबाओ
+   4. "Unknown Apps" allow करो (अगर पूछे)
+   5. Done! ✅
+
+तरीका B - ADB से (अगर ADB installed हो):
+   adb install NexusBrowser-debug.apk
+
+तरीका C - Google Drive से:
+   1. Google Drive में APK upload करो
+   2. Phone से Google Drive app खोलो
+   3. APK को open करो
+   4. Install करो
+
+================================================================================
+                        ❌ अगर ERROR आए तो?
+================================================================================
+
+Error 1: Build fail हो रहा है
+   → GitHub Actions logs को देखो
+   → या locally: ./gradlew assembleDebug
+
+Error 2: APK नहीं मिल रहा
+   → Build का status check करो (green checkmark देखो?)
+   → Artifacts section refresh करो
+
+Error 3: Install नहीं हो रहा
+   → Settings → Security → Unknown Apps को allow करो
+   → पुरानी APK को uninstall करो
+
+================================================================================
+                        📱 APP FEATURES (क्या करता है)
+================================================================================
+
+✅ Website browse करना
+✅ Video detect और download करना
+✅ M3u8 streams को support करना
+✅ Multi-threaded downloads
+✅ Picture-in-Picture (PiP) mode
+✅ Multiple tabs
+✅ Bookmarks
+✅ Dark mode
+✅ Incognito browsing
+✅ Ad blocking
+
+================================================================================
+                     🛠️ TECHNICAL DETAILS (अगर चाहो तो)
+================================================================================
+
+Android Version:  7.0+ (API 24-34)
+App Size:         ~30 MB (Debug) / ~15 MB (Release)
+Language:         Kotlin
+Version:          4.0
+Status:           ✅ Production Ready
+
+================================================================================
+                         ✨ IMPORTANT NOTES
+================================================================================
+
+1. Debug APK use करो अभी testing के लिए
+   (Release APK को signing की जरूरत है)
+
+2. हर बार जब तुम code push करोगे, APK automatically build होगा
+
+3. अगर code में कोई change करो, तो:
+   git add .
+   git commit -m "Updated message"
+   git push origin main
+   
+   फिर से build हो जाएगा!
+
+4. पुरानी APK को uninstall करके नई install करो
+
+================================================================================
+                        🎯 SUMMARY (एक नजर में)
+================================================================================
+
+1. Code push करो              → git push
+2. Wait करो                    → 5-8 minutes
+3. APK download करो           → GitHub Actions
+4. Install करो                → Phone में
+5. Enjoy! 🎉
+
+कितना आसान है न?
+
+================================================================================
+                       📞 अगर कोई problem हो?
+================================================================================
+
+1. GitHub Actions logs को check करो
+2. Local पर build try करो: ./gradlew assembleDebug
+3. Phone को Unknown Sources allow करो
+4. APK को uninstall-reinstall करो
+
+अगर फिर भी problem हो तो:
+- जिस file में issue है, उसे fix करो
+- फिर से push करो
+- दोबारा build होगा
+
+================================================================================
+
+🎉 अब तुम ready हो! 
+
+Happy Coding! 
+
+NexusBrowser v4.0
+================================================================================
