@@ -221,11 +221,9 @@ class SearchActivity : AppCompatActivity() {
                 putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak to search...")
             }
             
-            try {
-                voiceSearchLauncher.launch(intent)
-            } catch (e: ActivityNotFoundException) {
-                Toast.makeText(this, "Speech Recognition not available", Toast.LENGTH_SHORT).show()
-            }
+            voiceSearchLauncher.launch(intent)
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(this, "Speech Recognition not available", Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
             Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
         }
@@ -276,7 +274,7 @@ class SearchActivity : AppCompatActivity() {
         imm.hideSoftInputFromWindow(searchEditText.windowToken, 0)
     }
 
-    // ─── New menu item implementations ───────────────────────────────────
+    // ─── Menu item implementations ───────────────────────────────────
 
     private fun showBookmarks() {
         // Open MainActivity with bookmarks dialog
